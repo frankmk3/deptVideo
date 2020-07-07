@@ -1,0 +1,45 @@
+
+version: '3'
+networks:
+  dept-video:
+    driver: bridge
+services:
+  mongo:
+    image: mongo
+    networks: [ "dept-video" ]
+    volumes:
+     - ./dockercompose/mongo/data:/data/db
+    command: mongod  --logpath=/dev/null # --quiet
+    ports:
+      - "27097:27017"
+  dept-video-server:
+    depends_on: [ "mongo"]
+    build: dockercompose/dept-video-server
+    networks: [ "dept-video" ]
+    environment:
+      JAVA_OPTS:
+      JASYPT_ENCRYPTOR_PASSWORD: "${JASYPT_ENCRYPTOR_PASSWORD}"
+      APP_OPTS: --spring.mail.host=email --spring.mail.port=25
+    ports:
+     - "1888:1888"
+    volumes:
+     - ./dockercompose/dept-video-server/dept-video-server.jar:/home/app.jar
+
+  nginx:
+     build: dockercompose/nginx
+     networks: [ "dept-video" ]
+     ports:
+       - "1880:80"
+     volumes:
+     - ./dockercompose/nginx/var/www/html:/var/www/html
+     - ./dockercompose/nginx/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+     environment:
+      REACT_APP_API_BASE_URL: http://localhost:1888/v1/dept-video
+
+  email:
+     image: namshi/smtp
+     networks: [ "dept-video" ]
+     ports:
+       - "25:25"
+     environment:
+       DISABLE_IPV6: "true"

@@ -1,0 +1,34 @@
+<hazelcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.hazelcast.com/schema/config hazelcast-config-3.9.xsd"
+           xmlns="http://www.hazelcast.com/schema/config">
+
+    <map name="cache-short">
+        <time-to-live-seconds>30</time-to-live-seconds>
+        <max-size>200</max-size>
+        <in-memory-format>OBJECT</in-memory-format>
+    </map>
+
+    <cache name="cache-short">
+        <eviction size="200"/>
+
+        <statistics-enabled>true</statistics-enabled>
+        <management-enabled>true</management-enabled>
+    </cache>
+
+    <map name="cache">
+        <time-to-live-seconds>36000</time-to-live-seconds>
+    </map>
+
+    <cache name="cache">
+        <statistics-enabled>true</statistics-enabled>
+        <management-enabled>true</management-enabled>
+    </cache>
+
+    <network>
+        <join>
+            <tcp-ip enabled="false"/>
+            <multicast enabled="false"/>
+        </join>
+    </network>
+
+</hazelcast>

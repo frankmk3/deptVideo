@@ -1,0 +1,19 @@
+{
+  "VERY_SPECIFIC_APP_LABELS": "",
+
+  "app": {
+    "title": "Dept video"
+  },
+  "ROLE_ADMIN": "Admin",
+  "ROLE_USER": "User",
+  "STRINGS_WITH_PARAMETERS": "",
+
+  "expressions": {
+    "possible_attempts": "Possible attempts ({{count}}).",
+    "password_short": "Password is too short (Minimum {{PASSWORD_MIN_LENGTH}} characters needed).",
+    "password_long": "Password is too long (Maximum {{PASSWORD_MAX_LENGTH}} characters allowed).",
+    "name_short": "Name is too short (Minimum {{NAME_MIN_LENGTH}} characters needed).",
+    "name_long": "Name is too long (Maximum {{NAME_MAX_LENGTH}} characters allowed).",
+    "sorry_something_went_wrong":"Sorry! Something went wrong. Please try again!"
+  }
+}

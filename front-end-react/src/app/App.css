@@ -1,0 +1,124 @@
+html, body, #root, .app-container {
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+    position: relative;
+}
+
+.alCenter {
+    text-align: center;
+}
+
+.app-content {
+    min-height: 100%;
+    overflow: auto;
+    position: relative;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.brake-line {
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+}
+
+.brake-word {
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+}
+
+.app-content .container {
+    padding-top: 80px;
+}
+
+.action-separator {
+    margin-bottom: 10px;
+}
+
+.action-separator-x2 {
+    margin-bottom: 20px;
+}
+
+.radio-vertical {
+    display: block !important;
+    height: 30px;
+    lineHeight: 30px
+}
+
+.cronExpresion .ant-row .ant-form-item {
+    margin-bottom: 0 !important;
+}
+
+.client-selector {
+    width: 100%;
+    margin-bottom: 10px !important;
+}
+
+.form-footer-separator {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 16px;
+    left: 0;
+    background: #fff;
+    border-radius: 0 0 4px 4px;
+}
+
+.mrg-left {
+    margin-left: 10px;
+}
+
+.mrg-right {
+    margin-right: 10px;
+}
+
+.ant-table-wrapper {
+    margin-bottom: 40px;
+}
+
+.ant-form-item {
+    margin-bottom: 5px !important;
+}
+
+.connection-problem .ant-alert-message {
+    font-size: 1.5em;
+}
+
+.connection-problem .ant-alert-description {
+    font-size: 1.25em;
+}
+
+.connection-problem .anticon-close-circle {
+    width: 1.37em;
+    height: 1.37em;
+}
+
+.connection-problem .anticon-close-circle svg {
+    width: 1.3em;
+    height: 1.3em;
+}
+
+.connection-problem .ant-divider {
+    margin: 10px 0;
+}
+
+.connection-problem .retry {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #096dd9;
+}

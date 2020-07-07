@@ -1,0 +1,12 @@
+.react-player {
+    margin-bottom: 10px;
+    background: rgba(0,0,0,.1);
+    height: 315px;
+    text-align: center;
+}
+.SocialMediaShareButton{
+    display: inline-block;
+}
+.social-share-action{margin-top: 5px;}
+.social-share-action div{margin-right: 5px;}
+.hover-action { cursor: pointer; }

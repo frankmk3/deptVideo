@@ -1,0 +1,24 @@
+.login-container {
+    max-width: 420px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 25px 25px 0 25px;
+    border: #dddddd solid 1px;
+    border-radius: 4px;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.custom-separator {
+    margin-top: -25px !important;
+}
+
+.login-form .ant-form-item-control-wrapper {
+    margin-bottom: 18px;
+}
+
+.login-form .custom-links {
+    margin-top: 15px;
+}

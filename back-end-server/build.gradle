@@ -1,0 +1,118 @@
+import java.text.SimpleDateFormat
+
+
+buildscript {
+
+    ext {
+        springBootVersion = '2.1.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url 'https://repo.spring.io/libs-release'
+        }
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
+        maven {
+            url "http://maven.wso2.org/nexus/content/repositories/releases"
+        }
+        maven {
+            url "http://dist.wso2.org/maven2"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/groups/public"
+        }
+    }
+    dependencies {
+        classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+plugins { id "io.spring.dependency-management" version "1.0.4.RELEASE" }
+
+group = 'dept'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
+apply plugin: 'maven'
+
+version = '0.0.1-SNAPSHOT'
+
+bootJar {
+    baseName = "dept-video-server"
+    archiveName = "$baseName.$extension"
+
+    manifest {
+        attributes 'Implementation-Title': "$baseName.$extension",
+                'Implementation-Version': version,
+                'Tag-Version': 'git describe --tags'.execute().text.trim(),
+                'Build-Time': new SimpleDateFormat().format(new Date())
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/groups/public"
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+docker {
+    name "${project.group}/${jar.baseName}"
+    copySpec.from("build/libs/").into("build/libs/")
+    dockerfile file('Dockerfile')
+}
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion")
+    testCompileOnly("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-freemarker")
+    compile("org.springframework.boot:spring-boot-starter-mail")
+
+    testCompile("org.springframework:spring-test:5.1.8.RELEASE")
+    testCompile('junit:junit:4.12')
+
+    compile('commons-io:commons-io:2.6')
+    compile('commons-codec:commons-codec:1.12')
+
+    compile("io.springfox:springfox-swagger2:2.7.0")
+    compile("io.springfox:springfox-swagger-ui:2.7.0")
+    compile("io.jsonwebtoken:jjwt:0.9.0")
+    compile("com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.1")
+
+    compile("com.hazelcast:hazelcast")
+    compile("com.hazelcast:hazelcast-spring")
+
+
+    compileOnly("org.projectlombok:lombok:1.18.8")
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    testCompile('org.mockito:mockito-core:3.0.0')
+    compile('javax.xml.bind:jaxb-api:2.4.0-b180830.0359')
+
+}
+
+[bootRun].each { runTask ->
+    configure(runTask) {
+        systemProperties System.properties
+    }
+}
+
+bootRun {
+    if (project.hasProperty('args')) {
+        args = (project.args.split("\\s+") as List)
+    }
+}
